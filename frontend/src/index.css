@@ -66,8 +66,12 @@ html, body {
     color: rgba(196, 114, 7, 0.934);
 }
 .desc-text{
-    color: white;
-    padding:10vh  5vh;
+    color: rgb(142, 142, 142);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    padding-left: 75vh;
+    margin-top: 0px;
+    font-size: 3vh;
 }
 .card{
     border: 1px solid rgb(255, 255, 255);
@@ -78,10 +82,9 @@ html, body {
     align-items: center;
     text-align: center;
     justify-content: center;
-    background: linear-gradient( #848280, #000000);
+    background: linear-gradient( #060606, #6f6f6f,#000000);
 }
 .card .card-img{
-
     height: 4vh;
     width: 4vh;
     display: inline-block;
@@ -106,4 +109,6 @@ html, body {
     margin-left: 50vh;
     margin-right: 50vh;
     margin-top: 20vh;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding-bottom: 10vh;
 }

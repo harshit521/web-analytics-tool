@@ -19,8 +19,8 @@ const App = () => {
       <h1 className="hero-content2"> and tools</h1>
       <h3 className="desc-text">Shorten. Share. Analyze.</h3>
       <div className="features-card">
-        <Card url={urlImage} text={`Smart URLs for Smart Minds`} />
-        <Card url={analyticsImg} text={`Know What Clicks.`}/>
+        <Card url={urlImage} text={`Smart URLs for Smart Minds`} buttontext={`Try it`}/>
+        <Card url={analyticsImg} text={`Know What Clicks.`} buttontext={`View Analytics`}/>
         <Card url={commingSoon} text ={`New features. Comming soon...`}/>
       </div>
     </>

@@ -1,10 +1,12 @@
 
-const Card = (props) => {
+
+const Card = ({url,text,buttontext}) => {
     return(
         <>
             <div className="card">
-                <img src={props.url} alt="img" className="card-img"></img>
-                <p className="card-content">{props.text}</p>
+                <img src={url} alt="img" className="card-img"></img>
+                <p className="card-content">{text}</p>
+                <button>{buttontext}</button>
             </div>
         </>
     )
