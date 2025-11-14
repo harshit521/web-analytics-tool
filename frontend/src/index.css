@@ -1,10 +1,10 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* prevents horizontal scrolling */
-    background: radial-gradient(circle at top left, #404040, #000000, #000000);
-  }
+body {
+    font-family: Montserrat, sans-serif;
+    color: #fff;
+    background: #0e0e11;
+    background: radial-gradient(circle, #303030 1px, transparent 1px), #101010;
+    background-size: 20px 20px;
+}
 .nav-element{
     color: rgb(146, 146, 146);
     font-family:sans-serif;
@@ -111,4 +111,9 @@ html, body {
     margin-top: 20vh;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     padding-bottom: 10vh;
+}
+
+.card .buttons{
+    
+    border: none;
 }
