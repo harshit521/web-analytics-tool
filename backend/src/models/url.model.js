@@ -6,15 +6,16 @@ const urlSchema = new mongoose.Schema({
             required : true,
             unique: true
         },
-        originalCode:{
+        originalUrl:{
             type:String,
             required:true,
             unique:true
         },
-        clicks:{
-            type:Number,
-            default:0
-        }
+        visitHistory: [{
+            timestamp:{
+                type :Number
+            }
+        }]
     },
     {
         timestamps:true

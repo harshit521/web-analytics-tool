@@ -1,0 +1,31 @@
+.footers{
+    background-color: #575050df;
+    margin-bottom: 0%;
+
+}
+.lines{
+    margin-bottom: 0px;
+}
+.lines:hover{
+    color: white;
+}
+.main{
+    padding: 2px 10px;
+}
+.footers .footer-main{
+    display: flex;
+    justify-content: space-between;
+    padding: 10vh 40vh;
+    color: #b8b7b7;
+}
+.footers .footer-main .p-text{
+    color: white;
+}
+.main1{
+    font-size: 2vh;
+    margin-bottom: 0%;
+}
+
+.social-icons{
+    padding: 10px 10px;
+}

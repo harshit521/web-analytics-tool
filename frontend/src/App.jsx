@@ -3,7 +3,7 @@ import Card from "./Card.jsx"
 import commingSoon from "./assets/time-line.png"
 import urlImage from "./assets/urlimg.png"
 import analyticsImg from "./assets/analytics.png"
-
+import  Footer  from "./Footer.jsx"
 
 const App = () => {
 
@@ -22,6 +22,9 @@ const App = () => {
         <Card url={urlImage} text={`Smart URLs for Smart Minds`} buttontext={`Try it`}/>
         <Card url={analyticsImg} text={`Know What Clicks.`} buttontext={`View Analytics`}/>
         <Card url={commingSoon} text ={`New features. Comming soon...`}/>
+      </div>
+      <div>
+        <Footer/>
       </div>
     </>
   )

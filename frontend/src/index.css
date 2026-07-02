@@ -43,7 +43,7 @@ body {
     text-align: center;
     margin-top: 15vh;
     font-size: 10vh;
-    margin-left: 52vh;
+    margin-left: 50vh;
     max-width: 700px;
     margin-bottom: 0px;
     color: rgba(231, 230, 230, 0.693);
@@ -69,7 +69,7 @@ body {
     color: rgb(142, 142, 142);
     font-family: Arial, Helvetica, sans-serif;
     font-weight: lighter;
-    padding-left: 75vh;
+    margin-left: 75vh;
     margin-top: 0px;
     font-size: 3vh;
 }
@@ -114,6 +114,9 @@ body {
 }
 
 .card .buttons{
-    
+    background-color: #353333;
+    color: aliceblue;
     border: none;
+    padding: 10px 15px;
+    border-radius: 7px;
 }
