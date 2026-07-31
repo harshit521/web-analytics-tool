@@ -12,6 +12,7 @@ import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input"
 
 export const App =() => {
+  const [inputUrl, setInputUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [shortUrl, setShortUrl] = useState("");
   const handleSubmit = async (e) => {
@@ -21,18 +22,18 @@ export const App =() => {
 
     try {
       // Backend request
-      const response = await fetch("http://localhost:8000/api/shorten", {
+      const response = await fetch("http://localhost:3000/api/v1/urls/shorten", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          url: "https://example.com",
+          url: inputUrl,
         }),
       });
     const data = await response.json();
     console.log(data); // See what your backend returned
-    setShortUrl(data.data.shortUrl);
+    setShortUrl(data.data.shortendUrl);
 
       // Success
     } catch (err) {
@@ -59,6 +60,8 @@ export const App =() => {
               <Input
                 type="url"
                 placeholder="https://www.example.com"
+                value={inputUrl}
+                onChange={(e) => setInputUrl(e.target.value)}
                 required
               />
             </div>

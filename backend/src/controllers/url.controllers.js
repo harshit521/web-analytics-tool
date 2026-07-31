@@ -1,5 +1,5 @@
 import {nanoid} from "nanoid";
-import {Url} from "../models/url.model.js";
+import Url from "../models/url.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import {ApiError} from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
