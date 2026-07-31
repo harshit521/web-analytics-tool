@@ -11,6 +11,11 @@ const urlSchema = new mongoose.Schema({
             required:true,
             unique:true
         },
+        shortendUrl:{
+            type:String,
+            required:true,
+            unique:true
+        },
         visitHistory: [{
             timestamp:{
                 type :Number

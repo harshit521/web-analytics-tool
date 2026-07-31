@@ -1,33 +1,95 @@
-import NavElement from "./navElement.jsx"
-import Card from "./Card.jsx"
-import commingSoon from "./assets/time-line.png"
-import urlImage from "./assets/urlimg.png"
-import analyticsImg from "./assets/analytics.png"
-import  Footer  from "./Footer.jsx"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
+import { Input } from "@/components/ui/input"
 
-const App = () => {
+export const App =() => {
+  const [loading, setLoading] = useState(false);
+  const [shortUrl, setShortUrl] = useState("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    setLoading(true);
+
+    try {
+      // Backend request
+      const response = await fetch("http://localhost:8000/api/shorten", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          url: "https://example.com",
+        }),
+      });
+    const data = await response.json();
+    console.log(data); // See what your backend returned
+    setShortUrl(data.data.shortUrl);
+
+      // Success
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+    
+  };
   return (
     <>
-      <nav className="nav-bar">
-              <NavElement name="Home"/>
-              <NavElement name="Services"/>
-              <NavElement name="Contact"/>
-              <NavElement name="About"/>
-      </nav>
-      <h1 className="hero-content">Web<span className="special-content">analytics</span></h1>
-      <h1 className="hero-content2"> and tools</h1>
-      <h3 className="desc-text">Shorten. Share. Analyze.</h3>
-      <div className="features-card">
-        <Card url={urlImage} text={`Smart URLs for Smart Minds`} buttontext={`Try it`}/>
-        <Card url={analyticsImg} text={`Know What Clicks.`} buttontext={`View Analytics`}/>
-        <Card url={commingSoon} text ={`New features. Comming soon...`}/>
-      </div>
-      <div>
-        <Footer/>
-      </div>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <Card className="w-full max-w-sm">
+      <CardHeader>
+        <CardTitle>Enter Url</CardTitle>
+        <CardDescription>
+          Enter the url you want to shorten
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-6">
+            <div className="grid gap-2">
+              <Input
+                type="url"
+                placeholder="https://www.example.com"
+                required
+              />
+            </div>
+          </div>
+          <div className="flex-col gap-2 mt-4">
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          {loading ? "Creating..." : "Create Short URL"}
+        </Button>
+        </div>
+        </form>
+      </CardContent>
+      <CardFooter>
+        {shortUrl && (
+          <div className="w-full rounded-md border p-3">
+            <p className="text-sm text-muted-foreground">Short URL</p>
+
+            <a
+              href={shortUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline break-all"
+            >
+              {shortUrl}
+            </a>
+          </div>
+        )}
+      </CardFooter>
+      
+    </Card>
+    </div>
     </>
   )
 }
-
-export default App

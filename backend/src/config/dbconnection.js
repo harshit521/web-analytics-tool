@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { DB_NAME } from "../config/cosntants.js";
 
-console.log(process.env.mongo_db_url);
+
 
 const connectionOfDb = async () => {
 

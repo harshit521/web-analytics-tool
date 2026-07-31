@@ -12,32 +12,47 @@ const shortCodeGenerator = async() => {
     }
     return shortCode;
 }
-export const createShortUrls = asyncHandler(async(req,res)=>{
-const body = req.body;
-if(!body.url){
-    throw new ApiError(400,"Url is required");
+export const createShortUrls = asyncHandler(
+    async(req,res)=>{
+    const body = req.body;
+    if(!body.url){
+        throw new ApiError(400,"Url is required");
+    }
+    const existingUrl = await Url.findOne({'originalUrl':body.url},'originalUrl shortCode visitedHistory shortendUrl');
+    // console.log(existingUrl);
+    let sCode;
+    if(!existingUrl){
+        sCode = await shortCodeGenerator();
+        const shortUrl = `${process.env.BASE_URL}/${sCode}`;
+        const newUrl = await Url.create({
+            originalUrl: body.url,
+            shortCode :sCode,
+            shortendUrl:shortUrl
+        })
+        return res.status(201).json(
+            new ApiResponse(
+                201, 
+                {
+                    originalUrl:newUrl.originalUrl,
+                    shortCode:newUrl.shortCode,
+                    shortendUrl:newUrl.shortendUrl
+                },
+                "Short URL is created successfully."
+            )
+        )
+    }
+    if(existingUrl){
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            {
+                originalUrl:existingUrl.originalUrl,
+                shortCode:existingUrl.shortCode,
+                shortendUrl:existingUrl.shortendUrl
+            },
+            "URL already exist"
+        )
+    )
+    }
 }
-const existingUrl = await Url.findOne({'originalUrl':body.url},'originalUrl shortCode visitedHistory');
-console.log(existingUrl);
-let sCode;
-if(!existingUrl){
-     sCode = await shortCodeGenerator();
-}
-
-// Checkpoint 4: Save to Database
-// Create a new document with:
-// originalUrl
-// shortCode
-// Optional: createdAt timestamp
-// Save it in your URLs collection/table.
-const newUrl = await Url.create({
-    originalUrl:body.url,
-    shortCode = sCode
-})
-// Checkpoint 5: Return Response
-// Send back a response object with:
-// originalUrl
-// shortUrl (base URL + short code)
-// Handle errors gracefully.
-
-})
+)
