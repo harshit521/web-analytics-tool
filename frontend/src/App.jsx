@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import {RiClipboardLine } from "@remixicon/react";
 import {
   Card,
   CardContent,
@@ -15,6 +16,7 @@ export const App =() => {
   const [inputUrl, setInputUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [shortUrl, setShortUrl] = useState("");
+  const [copied, setCopied] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -76,17 +78,23 @@ export const App =() => {
       </CardContent>
       <CardFooter>
         {shortUrl && (
-          <div className="w-full rounded-md border p-3">
+          <div className="w-full rounded-md border p-3 ">
             <p className="text-sm text-muted-foreground">Short URL</p>
-
-            <a
-              href={shortUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 underline break-all"
-            >
-              {shortUrl}
-            </a>
+            <div>
+                <a
+                  href={shortUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline break-all"
+                >
+                  {shortUrl}
+                </a>
+                <button onClick={
+                  () => navigator.clipboard.writeText(shortUrl)
+                }>
+                  <RiClipboardLine />
+                </button>
+            </div>
           </div>
         )}
       </CardFooter>
