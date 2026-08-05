@@ -12,6 +12,23 @@ const shortCodeGenerator = async() => {
     }
     return shortCode;
 }
+export const redirectToOriginalUrl = asyncHandler(async (req, res) => {
+  const { shortCode } = req.params;
+
+  const url = await Url.findOne({ shortCode });
+
+  if (!url) {
+    throw new ApiError(404, "Short URL not found");
+  }
+
+  // Increment visit count (optional)
+  url.visitHistory.push({
+    timestamp: Date.now(),
+  });
+
+    await url.save();
+  return res.redirect(url.originalUrl);
+});
 export const createShortUrls = asyncHandler(
     async(req,res)=>{
     const body = req.body;
@@ -23,7 +40,7 @@ export const createShortUrls = asyncHandler(
     let sCode;
     if(!existingUrl){
         sCode = await shortCodeGenerator();
-        const shortUrl = `${process.env.BASE_URL}/${sCode}`;
+        const shortUrl = `${process.env.BASE_URL}/:${sCode}`;
         const newUrl = await Url.create({
             originalUrl: body.url,
             shortCode :sCode,
