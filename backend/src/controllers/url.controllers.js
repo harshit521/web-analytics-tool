@@ -40,7 +40,7 @@ export const createShortUrls = asyncHandler(
     let sCode;
     if(!existingUrl){
         sCode = await shortCodeGenerator();
-        const shortUrl = `${process.env.BASE_URL}/:${sCode}`;
+        const shortUrl = `${process.env.BASE_URL}/${sCode}`;
         const newUrl = await Url.create({
             originalUrl: body.url,
             shortCode :sCode,

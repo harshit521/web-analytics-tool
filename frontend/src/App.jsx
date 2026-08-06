@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
-import {RiClipboardLine } from "@remixicon/react";
+
+import { Copy, Check } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -16,7 +17,21 @@ export const App =() => {
   const [inputUrl, setInputUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [shortUrl, setShortUrl] = useState("");
+
   const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(shortUrl);
+      setCopied(true);
+
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error("Copy failed", err);
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -80,7 +95,7 @@ export const App =() => {
         {shortUrl && (
           <div className="w-full rounded-md border p-3 ">
             <p className="text-sm text-muted-foreground">Short URL</p>
-            <div>
+            <div className='flex justify-between'>
                 <a
                   href={shortUrl}
                   target="_blank"
@@ -89,10 +104,8 @@ export const App =() => {
                 >
                   {shortUrl}
                 </a>
-                <button onClick={
-                  () => navigator.clipboard.writeText(shortUrl)
-                }>
-                  <RiClipboardLine />
+                <button onClick={handleCopy}>
+                  {copied ? <Check size={18} /> : <Copy size={18} />}
                 </button>
             </div>
           </div>
